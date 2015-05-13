@@ -93,9 +93,9 @@ public class GameScreen implements ApplicationListener, Screen {
 		Gdx.input.setInputProcessor(new MyInputProcessor());
 
 		ressources = new Content();
-		ressources.loadTexture("images/player.png", "player");
-		ressources.loadTexture("images/coins3.png", "coin");
-		ressources.loadTexture("images/coins3.png", "wasser");
+		ressources.loadTexture("assets/images/player.png", "player");
+		ressources.loadTexture("assets/images/coins3.png", "coin");
+		ressources.loadTexture("assets/images/coins3.png", "wasser");
 
 
 		this.sb = new SpriteBatch();

@@ -40,7 +40,7 @@ public class MainMenuScreen implements Screen {
 		
 		Tween.registerAccessor(Sprite.class, new SpriteAccessor());
 
-		menuTexture = new Texture("pics/Landscape.png");
+		menuTexture = new Texture("assets/pics/Landscape.png");
 		sprite = new Sprite(menuTexture);
 		sprite.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
@@ -51,9 +51,9 @@ public class MainMenuScreen implements Screen {
 		skin = new Skin();
 		skin2 = new Skin();
 		textureAtlas = new TextureAtlas(
-				Gdx.files.internal("ui/unitybutton.pack"));
+				Gdx.files.internal("assets/ui/unitybutton.pack"));
 		textureAtlas2 = new TextureAtlas(
-				Gdx.files.internal("ui/buttonexit.pack"));
+				Gdx.files.internal("assets/ui/buttonexit.pack"));
 		skin.addRegions(textureAtlas);
 		skin2.addRegions(textureAtlas2);
 
@@ -99,8 +99,8 @@ public class MainMenuScreen implements Screen {
 
 		});
 
-		fontABC = new BitmapFont(Gdx.files.internal("Bitmapfont/newfont.fnt"),
-				Gdx.files.internal("Bitmapfont/newfont.png"), false);
+		fontABC = new BitmapFont(Gdx.files.internal("assets/Bitmapfont/newfont.fnt"),
+				Gdx.files.internal("assets/Bitmapfont/newfont.png"), false);
 	}
 
 	@Override

@@ -34,7 +34,7 @@ public class BeginScreen implements Screen {
 		Tween.to(fontABC, SpriteAccessor.ALPHA, 2).target(0).delay(2)
 				.start(tweenManager);
 
-		splashTexture = new Texture("pics/Landscape.png");
+		splashTexture = new Texture("assets/pics/Landscape.png");
 		splash = new Sprite(splashTexture);
 		splash.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight() + 18);
 
@@ -49,8 +49,8 @@ public class BeginScreen implements Screen {
 					}
 				}).start(tweenManager);
 
-		fontABC = new BitmapFont(Gdx.files.internal("Bitmapfont/newfont1.fnt"),
-				Gdx.files.internal("Bitmapfont/newfont1.png"), false);
+		fontABC = new BitmapFont(Gdx.files.internal("assets/Bitmapfont/newfont1.fnt"),
+				Gdx.files.internal("assets/Bitmapfont/newfont1.png"), false);
 
 	}
 

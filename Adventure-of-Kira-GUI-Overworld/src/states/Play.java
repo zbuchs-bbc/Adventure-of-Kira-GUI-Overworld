@@ -396,7 +396,7 @@ public class Play extends GameState {
 	private void createTiles() {
 
 		// load tile map
-		tileMap = new TmxMapLoader().load("Overworld/überwelt.tmx");
+		tileMap = new TmxMapLoader().load("assets/Overworld/überwelt.tmx");
 		tmr = new OrthogonalTiledMapRenderer(tileMap, 1 * 3f);
 		//tileSize = tileMap.getProperties().get("tilewidth", Integer.class);
 
