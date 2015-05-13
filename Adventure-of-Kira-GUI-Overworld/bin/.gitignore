@@ -1,6 +1,4 @@
-/backup/
-/GUI/
+/states/
 /entities/
 /game/
-/handlers/
-/states/
+/GUI/

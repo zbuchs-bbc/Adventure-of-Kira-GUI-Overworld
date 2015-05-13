@@ -2,7 +2,6 @@ package entities;
 
 import handlers.Animation;
 import states.Play;
-import backup.B2DVars;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;

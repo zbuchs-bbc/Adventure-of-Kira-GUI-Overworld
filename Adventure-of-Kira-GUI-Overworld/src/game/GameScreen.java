@@ -131,7 +131,7 @@ public class GameScreen implements ApplicationListener, Screen {
 			gsm.render();
 			MyInput.update();
 
-			bmf.setScale(2);
+			//bmf.setScale(2);
 			sb.begin();
 			drawString(sb, Player.getNumCoins() + " / 0", cam.position.x * 100+100,
 					cam.position.y * 100);

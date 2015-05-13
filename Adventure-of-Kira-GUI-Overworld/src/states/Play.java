@@ -4,7 +4,6 @@ import game.GameScreen;
 import handlers.GameStateManager;
 import handlers.MyContactListener;
 import GUI.BeginScreen;
-import backup.B2DVars;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
@@ -30,6 +29,7 @@ import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 
+import entities.B2DVars;
 import entities.Player;
 
 public class Play extends GameState {
@@ -398,7 +398,7 @@ public class Play extends GameState {
 		// load tile map
 		tileMap = new TmxMapLoader().load("Overworld/überwelt.tmx");
 		tmr = new OrthogonalTiledMapRenderer(tileMap, 1 * 3f);
-		tileSize = tileMap.getProperties().get("tilewidth", Integer.class);
+		//tileSize = tileMap.getProperties().get("tilewidth", Integer.class);
 
 		TiledMapTileLayer layer;
 
