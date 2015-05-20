@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="69" tileheight="70" nextobjectid="4">
+ <tileset firstgid="1" name="tiles" tilewidth="69" tileheight="70" spacing="2" margin="2">
+  <image source="tiles.png" trans="ff00ff" width="914" height="936"/>
+  <tile id="24">
+   <properties>
+    <property name="ActionBlock" value="ActionBloc"/>
+   </properties>
+  </tile>
+ </tileset>
+ <layer name="Hintergrund" width="50" height="50">
+  <data encoding="base64" compression="zlib">
+   eJzt08EJgEAMRcFfh41ZwPbfw54Er6ssxDgDuecRMpKMl1PBtcuZHh2rc6Rex32nv91Dxx4dO57+SQUd7/HlDgAAAAAAAAAgme74QNg=
+  </data>
+ </layer>
+ <layer name="Vordergrund" width="50" height="50">
+  <data encoding="base64" compression="zlib">
+   eJzdmNsNwjAMRbMCazFAFyhbIHYHPiJFxjbxI47dK1ktAvn6kDqPtqbXbWNU1pW4sJqrcVAMEo4XiB2SjMWTiAyCNY9j8QiuxSKMo6KuyAH7+3v/IGIU9RsqTm8IpG7qO00+ShTH8Yk7CI0vNzaafJjOxnNoFc1BycIw+mIMURxWhu6L9XdrMRweDN2X6u/VHEerwwHnnGMiNIrmWCWsN7w5Ili4tc+rP7x6QOK7igMGtx5qFMGByZOD63F4L8k5oxNcLdrN4TUmOzm6rCzU3LqLQ8uSkUPDkpVDwsKt2dEcX2lZZs+ykeeoUVfi4Mbn3zwLP+/i0HhU4zgJj0oc/RmrzMExYN4ZOWYYoHcWDjhfzeTNyiHNm4WDWjMkObF9SpZ9ojQn9+5klWb2INb/czXH7J7Qi2PlXCqpR6Jb+63fm2N2f27xHWtfxdHFcXh4wvpXrW0VObTnPIvgsxV5xhv9rcI4KoeGP0u04foGaJpJFQ==
+  </data>
+ </layer>
+ <layer name="ActionBlock" width="50" height="50">
+  <data encoding="base64" compression="zlib">
+   eJztzgENAAAIA6DXsH9RY1w3SEACAAAAAAAAAADww7QDnLZcMAAa
+  </data>
+ </layer>
+</map>

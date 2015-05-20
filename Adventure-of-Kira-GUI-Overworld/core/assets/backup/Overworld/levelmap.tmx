@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="69" tileheight="70" nextobjectid="1">
+ <tileset firstgid="1" name="tiles" tilewidth="69" tileheight="70" spacing="2" margin="2">
+  <image source="tiles.png" trans="ff00ff" width="914" height="936"/>
+ </tileset>
+ <layer name="Hintergrund" width="50" height="50">
+  <data encoding="base64" compression="zlib">
+   eJztzDENAAAIAzB04F8oBjjgIRztuS2LAAAAAAAAAADgWg6ybjPpNtvND8B3BUZVAJ0=
+  </data>
+ </layer>
+ <layer name="Vordergrund" width="50" height="50">
+  <data encoding="base64" compression="zlib">
+   eJztwzENAAAIA7CpxL8UNOwktEkTAAAAAAAAAAD4Y44EegtRhg4d
+  </data>
+ </layer>
+ <layer name="ActionBlock" width="50" height="50">
+  <data encoding="base64" compression="zlib">
+   eJztzTENAAAIA7AF/6IRsYeQ1kATAAAAAAAAAADozfMPuG8BOFAABQ==
+  </data>
+ </layer>
+</map>
