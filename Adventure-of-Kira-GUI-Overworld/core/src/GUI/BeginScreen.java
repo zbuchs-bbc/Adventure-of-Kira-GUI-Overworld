@@ -20,7 +20,7 @@ public class BeginScreen implements Screen {
 	private SpriteBatch batch;
 	private TweenManager tweenManager;
 	private BitmapFont fontABC;
-	Texture splashTexture;
+	private Texture splashTexture;
 
 	@Override
 	public void show() {
@@ -28,15 +28,17 @@ public class BeginScreen implements Screen {
 		tweenManager = new TweenManager();
 		Tween.registerAccessor(Sprite.class, new SpriteAccessor());
 
+		// splashTexture configuration
+		splashTexture = new Texture("assets/pics/Landscape.png");
+		splash = new Sprite(splashTexture);
+		splash.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight() + 18);
+
+		//Tween Manager configuration
 		Tween.set(fontABC, SpriteAccessor.ALPHA).target(0).start(tweenManager);
 		Tween.to(fontABC, SpriteAccessor.ALPHA, 2).target(1)
 				.start(tweenManager);
 		Tween.to(fontABC, SpriteAccessor.ALPHA, 2).target(0).delay(2)
 				.start(tweenManager);
-
-		splashTexture = new Texture("pics/Landscape.png");
-		splash = new Sprite(splashTexture);
-		splash.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight() + 18);
 
 		Tween.set(splash, SpriteAccessor.ALPHA).target(1f).start(tweenManager);
 		Tween.to(splash, SpriteAccessor.ALPHA, 2).repeatYoyo(1, 0)
@@ -49,8 +51,9 @@ public class BeginScreen implements Screen {
 					}
 				}).start(tweenManager);
 
-		fontABC = new BitmapFont(Gdx.files.internal("assets/Bitmapfont/newfont1.fnt"),
-				Gdx.files.internal("Bitmapfont/newfont1.png"), false);
+		fontABC = new BitmapFont(
+				Gdx.files.internal("assets/Bitmapfont/newfont1.fnt"),
+				Gdx.files.internal("assets/Bitmapfont/newfont1.png"), false);
 
 	}
 
@@ -70,25 +73,18 @@ public class BeginScreen implements Screen {
 
 	@Override
 	public void resize(int width, int height) {
-
 	}
 
 	@Override
 	public void pause() {
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override
 	public void resume() {
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override
 	public void hide() {
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override

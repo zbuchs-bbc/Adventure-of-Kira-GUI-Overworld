@@ -3,7 +3,7 @@ package states;
 import game.GameScreen;
 import handlers.GameStateManager;
 import handlers.MyContactListener;
-import GUI.BeginScreen;
+import GUI.MainMenuScreen;
 import backup.B2DVars;
 
 import com.badlogic.gdx.Game;
@@ -47,30 +47,28 @@ public class Play extends GameState {
 	public static Player player;
 	public BitmapFont font;
 	public TiledMapTileLayer mapTiles;
+	public Contact contact;
 
 	public static Vector2 movement = new Vector2(1, 1);
 	private float speed = 7, nitro = 0.6f;
+	private TiledMapTileLayer mapLoadLayer;
+	private Cell cell;
 
 	float x = cam.position.x - cam.viewportWidth;
 	float y = cam.position.y - cam.viewportHeight;
 	float width = cam.viewportWidth * GameScreen.WINDOW_WIDTH;
 	float height = cam.viewportHeight * GameScreen.WINDOW_HEIGHT;
+	float desiredVelocity;
 
 	public boolean keyPressed;
 	boolean collisionX = false, collisionY = false;
-
-	Contact contact;
-
-	float desiredVelocity;
-	private TiledMapTileLayer mapLoadLayer;
-	private Cell cell;
 
 	public Play(GameStateManager gsm) {
 
 		super(gsm);
 
 		// set up box2d stuff
-		world = new World(new Vector2(0,0f), true);
+		world = new World(new Vector2(0, 0f), true);
 		cl = new MyContactListener();
 		world.setContactListener(cl);
 		b2dr = new Box2DDebugRenderer();
@@ -82,41 +80,24 @@ public class Play extends GameState {
 		createTiles();
 
 		// set up box2d cam
-		b2dCam = new OrthographicCamera(width, height);
+		b2dCam = new OrthographicCamera();
 		b2dCam.setToOrtho(false, GameScreen.WINDOW_WIDTH / B2DVars.PPM,
 				GameScreen.WINDOW_HEIGHT / B2DVars.PPM);
-
 	}
 
 	public void update(float dt) {
 
-		// if (cl.isPlayerOnSpecialGround()) {
-		// System.out.println("playerAction = E");
-		// if (Gdx.input.isKeyPressed(Keys.E)) {
-		// ((Game) Gdx.app.getApplicationListener())
-		// .setScreen(new GameScreen());
-		//
-		// }
-		//
-		//
-		// }
-		// if (Gdx.input.isKeyPressed(Keys.NUM_1)) {
-		// ((Game) Gdx.app.getApplicationListener())
-		// .setScreen(new MainMenuScreen());
-		//
-		// }
-
+		// check if player is on level
 		if (cl.isPlayerOnSpecialGround()) {
 			System.out.println("playerAction = E");
 			if (Gdx.input.isKeyPressed(Keys.E)) {
-
-				if (cell.getTile().getProperties().containsKey("level")) {
-					((Game) Gdx.app.getApplicationListener())
-							.setScreen(new BeginScreen());
-					System.out.println("Cell level loaded");
-				}
+				((Game) Gdx.app.getApplicationListener())
+						.setScreen(new GameScreen());
 			}
-
+		}
+		if (Gdx.input.isKeyPressed(Keys.NUM_1)) {
+			((Game) Gdx.app.getApplicationListener())
+					.setScreen(new MainMenuScreen());
 		}
 
 		tmr.setView(cam.combined, x, y, width, height);
@@ -140,11 +121,28 @@ public class Play extends GameState {
 
 		player.update(dt);
 
+		// player can't move out of edge
+		if (cam.position.x > 2793) {
+			cam.position.x = 2793;
+		}
+
+		if (cam.position.x < 2021) {
+			cam.position.x = 2021;
+		}
+
+		if (cam.position.y > 3275) {
+			cam.position.y = 3275;
+		}
+		if (cam.position.y < 1720) {
+			cam.position.y = 1720;
+		}
+
+		cam.update();
+
 	}
 
 	public void render() {
 
-		// clear screen
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
@@ -153,6 +151,7 @@ public class Play extends GameState {
 		sb.begin();
 		tmr.getBatch().begin();
 
+		// render the maplayers
 		tmr.renderTileLayer((TiledMapTileLayer) tileMap.getLayers().get(
 				"Ground"));
 		tmr.renderTileLayer((TiledMapTileLayer) tileMap.getLayers().get("Deko"));
@@ -169,7 +168,7 @@ public class Play extends GameState {
 
 		tmr.setView(cam);
 
-		tmr.getMap().getProperties().get("level");
+		tmr.render();
 
 		// draw player
 
@@ -178,6 +177,7 @@ public class Play extends GameState {
 
 		sb.begin();
 		tmr.getBatch().begin();
+
 		// render player behind layer
 		tmr.renderTileLayer((TiledMapTileLayer) tileMap.getLayers().get(
 				"ActionBlock"));
@@ -194,49 +194,45 @@ public class Play extends GameState {
 			@Override
 			public boolean touchUp(int screenX, int screenY, int pointer,
 					int button) {
-				// TODO Auto-generated method stub
 				return false;
 			}
 
 			@Override
 			public boolean touchDragged(int screenX, int screenY, int pointer) {
-				// TODO Auto-generated method stub
 				return false;
 			}
 
 			@Override
 			public boolean touchDown(int screenX, int screenY, int pointer,
 					int button) {
-				// TODO Auto-generated method stub
 				return false;
 			}
 
 			@Override
 			public boolean scrolled(int amount) {
-				// TODO Auto-generated method stub
 				return false;
 			}
 
 			@Override
 			public boolean mouseMoved(int screenX, int screenY) {
-				// TODO Auto-generated method stub
 				return false;
 			}
 
+			// Player-Sprite movement
 			@Override
 			public boolean keyUp(int keycode) {
 				switch (keycode) {
 				case Keys.A:
 					player.changeRegion(2, 10000);
+
 					// Sprite für Stehenbleiben ändern
 					movement.x = 0;
 					System.out.println("Links losgelassen pos: "
 							+ player.getPosition().x);
 					break;
 				case Keys.D:
-					player.changeRegion(3, 10000); // Sprite für Stehenbleiben
-													// ändern (1/12f) = delay
-													// für Animationen
+
+					player.changeRegion(3, 10000);
 					movement.x = 0;
 					System.out.println("Rechts losgelassen pos: "
 							+ player.getPosition().x);
@@ -271,34 +267,15 @@ public class Play extends GameState {
 
 			@Override
 			public boolean keyTyped(char character) {
-				// TODO Auto-generated method stub
 				return false;
 			}
 
+			// Player WASD movement
 			@Override
 			public boolean keyDown(int keycode) {
 				switch (keycode) {
-				case Keys.SPACE:
-					if (cl.isPlayerOnGround()) {
-						// movement.y = speed * 1.2f;
-						if (cl.isInWater()) {
-							System.out.println("Ground + Water!");
-							movement.y = speed * 1.2f;
-						}
-					} else if (cl.isInWater()) {
-						System.out.println("Water!");
-						movement.y = speed * 1.2f;
-						player.changeRegion(0, 1 / 8);
-					}
-					MyContactListener.water = false;
-					break;
-
 				case Keys.A:
-					if (Gdx.input.isKeyPressed(Keys.SHIFT_LEFT)) {
-						movement.x = -speed;
-						System.out.println("A +Shift" + player.getPosition().x);
-						System.out.println("A mit Shift: " + movement.x);
-					}
+
 					player.changeRegion(2, 1 / 12f);
 					movement.x = -speed;
 					System.out.println("Links: " + movement);
@@ -306,11 +283,7 @@ public class Play extends GameState {
 					break;
 
 				case Keys.D:
-					if (Gdx.input.isKeyPressed(Keys.SHIFT_LEFT)) {
-						movement.x = speed;
-						System.out.println("D + Shift" + player.getPosition().x);
-						System.out.println("D mit Shift: " + movement.x);
-					}
+
 					player.changeRegion(3, 1 / 12f);
 					movement.x = speed;
 					System.out.println("Rechts: " + movement);
@@ -328,22 +301,6 @@ public class Play extends GameState {
 					movement.y = -speed / 2;
 					System.out.println("Unten: " + movement);
 					break;
-
-				case Keys.SHIFT_LEFT:
-					if (Gdx.input.isKeyPressed(Keys.A)) {
-						player.changeRegion(0, 1 / 18f);
-						movement.x = -speed * 1.6f;
-						System.out.println("Shift + Links"
-								+ player.getPosition().x);
-						System.out.println("Links mit Shift: " + movement.x);
-					} else if (Gdx.input.isKeyPressed(Keys.D)) {
-						player.changeRegion(3, 1 / 18f);
-						movement.x = speed * 1.6f;
-						System.out.println("Shift + Rechts: "
-								+ player.getPosition().x);
-						System.out.println("Rechts mit Shift: " + movement.x);
-					}
-					break;
 				}
 				return true;
 			}
@@ -351,6 +308,10 @@ public class Play extends GameState {
 	}
 
 	public void dispose() {
+		b2dr.dispose();
+		font.dispose();
+		game.dispose();
+		tileMap.dispose();
 	}
 
 	private void createPlayer() {
@@ -370,7 +331,6 @@ public class Play extends GameState {
 		fdef.filter.maskBits = B2DVars.BIT_GROUND;
 
 		body.createFixture(fdef).setUserData("player");
-		
 
 		// create foot sensor
 		shape.setAsBox(7.5f / B2DVars.PPM, 0.2f / B2DVars.PPM, new Vector2(0,
@@ -397,12 +357,13 @@ public class Play extends GameState {
 	private void createTiles() {
 
 		// load tile map
-		tileMap = new TmxMapLoader().load("Overworld/überwelt.tmx");
+		tileMap = new TmxMapLoader().load("assets/Overworld/überwelt.tmx");
 		tmr = new OrthogonalTiledMapRenderer(tileMap, 1 * 3f);
 		tileSize = tileMap.getProperties().get("tilewidth", Integer.class);
 
 		TiledMapTileLayer layer;
 
+		// create the layers
 		layer = (TiledMapTileLayer) tileMap.getLayers().get("Ground");
 		createLayer(layer, B2DVars.BIT_INSEL);
 
@@ -417,6 +378,7 @@ public class Play extends GameState {
 
 		layer = (TiledMapTileLayer) tileMap.getLayers().get("ActionBlock");
 		createLayer(layer, B2DVars.BIT_ACTIONBLOCK);
+
 	}
 
 	private void createLayer(TiledMapTileLayer layer, short bits) {
@@ -439,8 +401,8 @@ public class Play extends GameState {
 
 				// create a body + fixture from cell
 				bdef.type = BodyType.StaticBody;
-				bdef.position.set((col * 3) * tileSize / B2DVars.PPM, (row * 3)
-						* tileSize / B2DVars.PPM);
+				bdef.position.set((col * 3.05f) * tileSize / B2DVars.PPM,
+						(row * 3) * tileSize / B2DVars.PPM);
 
 				ChainShape cs = new ChainShape();
 				Vector2[] v = new Vector2[3];
@@ -453,10 +415,7 @@ public class Play extends GameState {
 				// Ecke oben Links
 				v[2] = new Vector2(tileSize / B2DVars.PPM * 1.5f, tileSize
 						/ B2DVars.PPM * 1.5f);
-				// // Ecke oben Rechts
-				// v[3] = new Vector2(
-				// (tileSize / 2 / B2DVars.PPM) / 2, (-tileSize / 2 /
-				// B2DVars.PPM) / 2);
+
 				cs.createChain(v);
 				fdef.friction = 0;
 				fdef.shape = cs;
@@ -470,6 +429,7 @@ public class Play extends GameState {
 
 	}
 
+	// Getter & Setter
 	public World getWorld() {
 		return world;
 	}
@@ -526,12 +486,148 @@ public class Play extends GameState {
 		this.tmr = tmr;
 	}
 
-	public Player getPlayer() {
+	public static Player getPlayer() {
 		return player;
 	}
 
 	public void setPlayer(Player player) {
 		Play.player = player;
+	}
+
+	public MapProperties getMapProperties() {
+		return mapProperties;
+	}
+
+	public void setMapProperties(MapProperties mapProperties) {
+		this.mapProperties = mapProperties;
+	}
+
+	public BitmapFont getFont() {
+		return font;
+	}
+
+	public void setFont(BitmapFont font) {
+		this.font = font;
+	}
+
+	public TiledMapTileLayer getMapTiles() {
+		return mapTiles;
+	}
+
+	public void setMapTiles(TiledMapTileLayer mapTiles) {
+		this.mapTiles = mapTiles;
+	}
+
+	public static Vector2 getMovement() {
+		return movement;
+	}
+
+	public static void setMovement(Vector2 movement) {
+		Play.movement = movement;
+	}
+
+	public float getSpeed() {
+		return speed;
+	}
+
+	public void setSpeed(float speed) {
+		this.speed = speed;
+	}
+
+	public float getNitro() {
+		return nitro;
+	}
+
+	public void setNitro(float nitro) {
+		this.nitro = nitro;
+	}
+
+	public float getX() {
+		return x;
+	}
+
+	public void setX(float x) {
+		this.x = x;
+	}
+
+	public float getY() {
+		return y;
+	}
+
+	public void setY(float y) {
+		this.y = y;
+	}
+
+	public float getWidth() {
+		return width;
+	}
+
+	public void setWidth(float width) {
+		this.width = width;
+	}
+
+	public float getHeight() {
+		return height;
+	}
+
+	public void setHeight(float height) {
+		this.height = height;
+	}
+
+	public boolean isKeyPressed() {
+		return keyPressed;
+	}
+
+	public void setKeyPressed(boolean keyPressed) {
+		this.keyPressed = keyPressed;
+	}
+
+	public boolean isCollisionX() {
+		return collisionX;
+	}
+
+	public void setCollisionX(boolean collisionX) {
+		this.collisionX = collisionX;
+	}
+
+	public boolean isCollisionY() {
+		return collisionY;
+	}
+
+	public void setCollisionY(boolean collisionY) {
+		this.collisionY = collisionY;
+	}
+
+	public Contact getContact() {
+		return contact;
+	}
+
+	public void setContact(Contact contact) {
+		this.contact = contact;
+	}
+
+	public float getDesiredVelocity() {
+		return desiredVelocity;
+	}
+
+	public void setDesiredVelocity(float desiredVelocity) {
+		this.desiredVelocity = desiredVelocity;
+	}
+
+	public TiledMapTileLayer getMapLoadLayer() {
+		return mapLoadLayer;
+	}
+
+	public void setMapLoadLayer(TiledMapTileLayer mapLoadLayer) {
+		this.mapLoadLayer = mapLoadLayer;
+	}
+
+	public Cell getCell() {
+		return cell;
+	}
+
+	public void setCell(Cell cell) {
+		this.cell = cell;
 	}
 
 }

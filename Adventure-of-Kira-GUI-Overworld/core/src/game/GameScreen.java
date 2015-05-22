@@ -37,33 +37,11 @@ public class GameScreen implements ApplicationListener, Screen {
 	private GameStateManager gsm;
 
 	public static Content ressources;
-	
-
-	public void create() {
-
-
-
-	}
-
-	private void drawString(SpriteBatch sb, String s, float x, float y) {
-		for (int i = 0; i < s.length(); i++) {
-			char c = s.charAt(i);
-			if (c == '/')
-				c = 10;
-			else if (c >= '0' && c <= '9')
-				c -= '0';
-			else
-				continue;
-			bmf.draw(sb, "Coins: " + Player.getNumCoins(),
-					cam.position.x - 900, cam.position.y + 500);
-		}
-	}
-	
 
 	public void dispose() {
 		bmf.dispose();
 		sb.dispose();
-		
+
 	}
 
 	public SpriteBatch getSpriteBatch() {
@@ -93,10 +71,7 @@ public class GameScreen implements ApplicationListener, Screen {
 		Gdx.input.setInputProcessor(new MyInputProcessor());
 
 		ressources = new Content();
-		ressources.loadTexture("images/player.png", "player");
-		ressources.loadTexture("images/coins3.png", "coin");
-		ressources.loadTexture("images/coins3.png", "wasser");
-
+		ressources.loadTexture("assets/images/player.png", "player");
 
 		this.sb = new SpriteBatch();
 		this.cam = new OrthographicCamera();
@@ -107,23 +82,21 @@ public class GameScreen implements ApplicationListener, Screen {
 
 		gsm = new GameStateManager(this);
 
-		score = 0;
-		scoreName = "score: " + score;
 		bmf = new BitmapFont();
 	}
 
-
 	@Override
 	public void hide() {
-		// TODO Auto-generated method stub
-		
+	}
+
+	@Override
+	public void render() {
 	}
 
 	@Override
 	public void render(float delta) {
-		
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-		
+
 		accum += Gdx.graphics.getDeltaTime();
 		while (accum >= STEP) {
 			accum -= STEP;
@@ -132,27 +105,19 @@ public class GameScreen implements ApplicationListener, Screen {
 			MyInput.update();
 
 			bmf.setScale(2);
-			sb.begin();
-			drawString(sb, Player.getNumCoins() + " / 0", cam.position.x * 100+100,
-					cam.position.y * 100);
-			sb.end();
 
-			cam.position.set(Play.player.getPosition().x * 100+100 ,
+			cam.position.set(Play.player.getPosition().x * 100 + 100,
 					Play.player.getPosition().y * 100, 0);
-			
+
 			sb.setProjectionMatrix(cam.combined);
 			cam.update();
 		}
-		
+
 	}
 
 	@Override
-	public void render() {
-		// TODO Auto-generated method stub
-		
+	public void create() {
+
 	}
 
-			
-	}
-
-
+}

@@ -21,17 +21,18 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
 public class MainMenuScreen implements Screen {
 
-	public SpriteBatch batch;
-	public Sprite sprite;
-	public Stage stage;
-	public BitmapFont font, font2;
-	public Skin skin, skin2;
-	public TextureAtlas textureAtlas, textureAtlas2;
-	public TextButtonStyle textButtonStyle, textButtonStyle2;
+	private SpriteBatch batch;
+	private Sprite sprite;
+	private Stage stage;
+	private BitmapFont font, font2;
+	private Skin skin, skin2;
+	private TextureAtlas textureAtlas, textureAtlas2;
+	private TextButtonStyle textButtonStyle, textButtonStyle2;
+	private BitmapFont fontABC;
+	private Texture menuTexture;
+	
 	public TextButton button, button1, button2;
 	public MyGdxGame game;
-	public BitmapFont fontABC;
-	public Texture menuTexture;
 
 	@Override
 	public void show() {
@@ -40,7 +41,7 @@ public class MainMenuScreen implements Screen {
 		
 		Tween.registerAccessor(Sprite.class, new SpriteAccessor());
 
-		menuTexture = new Texture("pics/Landscape.png");
+		menuTexture = new Texture("assets/pics/Landscape.png");
 		sprite = new Sprite(menuTexture);
 		sprite.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
@@ -99,8 +100,8 @@ public class MainMenuScreen implements Screen {
 
 		});
 
-		fontABC = new BitmapFont(Gdx.files.internal("Bitmapfont/newfont.fnt"),
-				Gdx.files.internal("Bitmapfont/newfont.png"), false);
+		fontABC = new BitmapFont(Gdx.files.internal("assets/Bitmapfont/newfont.fnt"),
+				Gdx.files.internal("assets/Bitmapfont/newfont.png"), false);
 	}
 
 	@Override
@@ -134,21 +135,13 @@ public class MainMenuScreen implements Screen {
 	}
 
 	@Override
-	public void pause() {
-		// TODO Auto-generated method stub
-
-	}
+	public void pause() {}
+	
+	@Override
+	public void resume() {}
 
 	@Override
-	public void resume() {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void hide() {
-
-	}
+	public void hide() {}
 
 	@Override
 	public void dispose() {

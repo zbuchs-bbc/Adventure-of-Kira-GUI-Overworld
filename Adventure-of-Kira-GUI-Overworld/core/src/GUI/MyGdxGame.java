@@ -8,7 +8,6 @@ public class MyGdxGame extends Game {
 
 	public static final int WINDOW_WIDTH = 1920;
 	public static final int WINDOW_HEIGHT = 1080;
-	public static final double VERSION = 3.0;
 
 	public void create() {
 		setScreen(new BeginScreen());

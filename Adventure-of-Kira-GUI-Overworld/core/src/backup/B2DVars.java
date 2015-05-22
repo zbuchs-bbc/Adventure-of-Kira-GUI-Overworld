@@ -11,6 +11,5 @@ public class B2DVars {
 	public static final short BIT_BACKGROUND = 8; // 0000 0000 0000 1000
 	public static final short BIT_ACTIONBLOCK = 16; // 0000 0000 0001 0000
 	public static final short BIT_INSEL = 32; // 0000 0000 0001 0000
-	public static final short BIT_WASSER = 64; // 0000 0000 0001 0000
 
 }

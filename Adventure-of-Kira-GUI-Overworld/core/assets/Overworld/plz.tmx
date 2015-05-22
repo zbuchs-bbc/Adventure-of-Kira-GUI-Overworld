@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" renderorder="right-down" width="60" height="56" tilewidth="16" tileheight="16" nextobjectid="1">
  <tileset firstgid="1" name="tileset_1" tilewidth="16" tileheight="16">
-  <image source="../Downloads/test/core/assets/Overworld/tileset_1.png" trans="ff00ff" width="256" height="336"/>
+  <image source="tileset_1.png" trans="ff00ff" width="256" height="336"/>
   <tile id="258">
    <properties>
     <property name="level" value=""/>
@@ -37,7 +37,7 @@
   <image source="mountains_0.png" trans="ff00ff" width="192" height="160"/>
  </tileset>
  <tileset firstgid="457" name="water2" tilewidth="16" tileheight="16">
-  <image source="../Downloads/test/core/assets/Overworld/water2.png" trans="ff00ff" width="480" height="32"/>
+  <image source="water2.png" trans="ff00ff" width="480" height="32"/>
  </tileset>
  <layer name="Ground" width="60" height="56">
   <data encoding="base64" compression="zlib">
