@@ -33,7 +33,7 @@ public class BeginScreen implements Screen {
 		splash = new Sprite(splashTexture);
 		splash.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight() + 18);
 
-		//Tween Manager configuration
+		// Tween Manager configuration
 		Tween.set(fontABC, SpriteAccessor.ALPHA).target(0).start(tweenManager);
 		Tween.to(fontABC, SpriteAccessor.ALPHA, 2).target(1)
 				.start(tweenManager);
@@ -44,6 +44,13 @@ public class BeginScreen implements Screen {
 		Tween.to(splash, SpriteAccessor.ALPHA, 2).repeatYoyo(1, 0)
 				.setCallback(new TweenCallback() {
 
+					/**
+					 * Sobald der Screen fertig verblasst ist, wird der
+					 * MainMenuScreen geladen
+					 *
+					 * @author Simon Buchli
+					 * @version 1.0
+					 */
 					@Override
 					public void onEvent(int type, BaseTween<?> source) {
 						((Game) Gdx.app.getApplicationListener())

@@ -30,7 +30,7 @@ public class MainMenuScreen implements Screen {
 	private TextButtonStyle textButtonStyle, textButtonStyle2;
 	private BitmapFont fontABC;
 	private Texture menuTexture;
-	
+
 	public TextButton button, button1, button2;
 	public MyGdxGame game;
 
@@ -38,7 +38,7 @@ public class MainMenuScreen implements Screen {
 	public void show() {
 
 		batch = new SpriteBatch();
-		
+
 		Tween.registerAccessor(Sprite.class, new SpriteAccessor());
 
 		menuTexture = new Texture("assets/pics/Landscape.png");
@@ -58,8 +58,7 @@ public class MainMenuScreen implements Screen {
 		skin.addRegions(textureAtlas);
 		skin2.addRegions(textureAtlas2);
 
-
-		// create Buttonstyle
+		// create the Button
 		textButtonStyle = new TextButtonStyle();
 		textButtonStyle.font = font;
 		textButtonStyle.up = skin.getDrawable("button.up");
@@ -82,7 +81,11 @@ public class MainMenuScreen implements Screen {
 		button1.setSize(0.2f * stage.getWidth(), 0.1f * stage.getWidth()
 				* button1.getHeight() / button1.getWidth());
 
-		// Click Listener
+		/**
+		 * ClickListener für die Buttons
+		 * 
+		 * @author Simon Buchli
+		 */
 		button.addListener(new ClickListener() {
 			public void touchUp(InputEvent e, float x, float y, int point,
 					int button) {
@@ -100,7 +103,8 @@ public class MainMenuScreen implements Screen {
 
 		});
 
-		fontABC = new BitmapFont(Gdx.files.internal("assets/Bitmapfont/newfont.fnt"),
+		fontABC = new BitmapFont(
+				Gdx.files.internal("assets/Bitmapfont/newfont.fnt"),
 				Gdx.files.internal("assets/Bitmapfont/newfont.png"), false);
 	}
 
@@ -118,8 +122,6 @@ public class MainMenuScreen implements Screen {
 		font.draw(batch, "FPS: " + Gdx.graphics.getFramesPerSecond(), 20, 1050);
 
 		batch.end();
-		
-		
 
 		// Add Buttons
 		stage.addActor(button);
@@ -135,13 +137,16 @@ public class MainMenuScreen implements Screen {
 	}
 
 	@Override
-	public void pause() {}
-	
-	@Override
-	public void resume() {}
+	public void pause() {
+	}
 
 	@Override
-	public void hide() {}
+	public void resume() {
+	}
+
+	@Override
+	public void hide() {
+	}
 
 	@Override
 	public void dispose() {

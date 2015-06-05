@@ -6,7 +6,6 @@ public class MyInput {
 	public static boolean[] keys;
 	public static boolean[] pkeys;
 	
-	public static final int JUMP = 0;
 	public static final int BUTTON2 = 1;
 	public static final int LEFT = 2;
 	public static final int RIGHT = 3;

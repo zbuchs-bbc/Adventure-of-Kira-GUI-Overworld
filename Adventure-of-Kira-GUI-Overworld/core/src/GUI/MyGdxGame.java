@@ -4,8 +4,6 @@ import com.badlogic.gdx.Game;
 
 public class MyGdxGame extends Game {
 
-	// erstelle Instanzen
-
 	public static final int WINDOW_WIDTH = 1920;
 	public static final int WINDOW_HEIGHT = 1080;
 
@@ -23,6 +21,7 @@ public class MyGdxGame extends Game {
 	}
 
 	public void update() {
+		
 	}
 
 	public void pause() {

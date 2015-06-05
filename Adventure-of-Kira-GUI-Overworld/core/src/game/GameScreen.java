@@ -19,10 +19,8 @@ import entities.Player;
 
 public class GameScreen implements ApplicationListener, Screen {
 
-	public static final String TITLE = "Adventures of Kira";
 	public static final int WINDOW_WIDTH = 1920;
 	public static final int WINDOW_HEIGHT = 1080;
-	public static final int SCALE = 1;
 	public static final float STEP = 1 / 60f;
 	private float accum;
 	public static int score;

@@ -23,7 +23,11 @@ public class B2DSprite extends TextureRegion {
 		this.body = body;
 		animation = new Animation();
 	}
-	
+	/**
+	 * set the Animation
+	 * 
+	 * @author Tim Killenberger
+	 */
 	public void setAnimation(TextureRegion[] sprites, float delay) {
 		animation.setFrames(sprites, delay);
 		width = sprites[0].getRegionWidth();
@@ -34,6 +38,11 @@ public class B2DSprite extends TextureRegion {
 	animation.update(dt);	
 	}
 	
+	/**
+	 * animate the player
+	 * 
+	 * @author Tim Killenberger
+	 */
 	public void render(SpriteBatch sb) {
 		sb.begin();
 	if(body.getUserData().toString().contains("Player") == true) {

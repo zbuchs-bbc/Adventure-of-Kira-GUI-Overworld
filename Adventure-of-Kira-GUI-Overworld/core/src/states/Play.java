@@ -87,7 +87,13 @@ public class Play extends GameState {
 
 	public void update(float dt) {
 
-		// check if player is on level
+		/**
+		 * check if player is on level
+		 * 
+		 * @author Simon Buchli
+		 */
+
+		//
 		if (cl.isPlayerOnSpecialGround()) {
 			System.out.println("playerAction = E");
 			if (Gdx.input.isKeyPressed(Keys.E)) {
@@ -121,7 +127,11 @@ public class Play extends GameState {
 
 		player.update(dt);
 
-		// player can't move out of edge
+		/**
+		 * player can't move out of edge
+		 * 
+		 * @author Kurt Blaser, Simon Buchli
+		 */
 		if (cam.position.x > 2793) {
 			cam.position.x = 2793;
 		}
@@ -188,6 +198,11 @@ public class Play extends GameState {
 		b2dr.render(world, b2dCam.combined);
 	}
 
+	/**
+	 * check the keyInput
+	 * 
+	 * @author Tim Killenberger
+	 */
 	public void handleInput() {
 		Gdx.input.setInputProcessor(new InputProcessor() {
 
@@ -218,7 +233,11 @@ public class Play extends GameState {
 				return false;
 			}
 
-			// Player-Sprite movement
+			/**
+			 * Player-Sprite movement
+			 * 
+			 * @author Tim Killenberger
+			 */
 			@Override
 			public boolean keyUp(int keycode) {
 				switch (keycode) {
@@ -270,7 +289,11 @@ public class Play extends GameState {
 				return false;
 			}
 
-			// Player WASD movement
+			/**
+			 * Player WASD movement
+			 * 
+			 * @author Tim Killenberger, Simon Buchli
+			 */
 			@Override
 			public boolean keyDown(int keycode) {
 				switch (keycode) {
@@ -314,6 +337,11 @@ public class Play extends GameState {
 		tileMap.dispose();
 	}
 
+	/**
+	 * creates the Player with all sensors
+	 * 
+	 * @author Tim Killenberger, Simon Buchli
+	 */
 	private void createPlayer() {
 
 		BodyDef bdef = new BodyDef();
@@ -354,6 +382,11 @@ public class Play extends GameState {
 		body.setUserData(player);
 	}
 
+	/**
+	 * load the tile map and creates the layers
+	 * 
+	 * @author Tim Killenberger, Simon Buchli
+	 */
 	private void createTiles() {
 
 		// load tile map
@@ -381,6 +414,11 @@ public class Play extends GameState {
 
 	}
 
+	/**
+	 * create the layer which the player can move on
+	 * 
+	 * @author Tim Killenberger, Simon Buchli
+	 */
 	private void createLayer(TiledMapTileLayer layer, short bits) {
 
 		BodyDef bdef = new BodyDef();

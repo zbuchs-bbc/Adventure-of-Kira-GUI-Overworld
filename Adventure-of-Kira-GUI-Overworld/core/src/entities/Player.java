@@ -7,7 +7,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.physics.box2d.Body;
 
 public class Player extends B2DSprite {
-	
+
 	public static int numCoins;
 	public static int totalCoins;
 	public Texture tex;
@@ -15,24 +15,46 @@ public class Player extends B2DSprite {
 	private int x = 3;
 
 	public Player(Body body) {
-		
+
+		/**
+		 * change the Region of the sprite
+		 * 
+		 * @author Tim Killenberger
+		 */
 		super(body);
 		tex = GameScreen.ressources.getTexture("player");
 		sprites = TextureRegion.split(tex, 32, 64)[x];
 		setAnimation(sprites, 1 / 12f);
 		System.out.println("Sprites: " + sprites.length);
 	}
-	
+
+	/**
+	 * change the Region of the sprite
+	 * 
+	 * @author Tim Killenberger
+	 */
 	public void changeRegion(int x, float delay) {
 		sprites = TextureRegion.split(tex, 32, 64)[x];
 		setAnimation(sprites, delay);
 		this.x = x;
 	}
-	
-	public void collectCoin() { setNumCoins(getNumCoins() + 1); System.out.println(getNumCoins()); }
-	public int getNumCoin() { return getNumCoins(); }
-	public void setTotalCoin(int i) { totalCoins = i; }
-	public int getTotalCoin() { return totalCoins; }
+
+	public void collectCoin() {
+		setNumCoins(getNumCoins() + 1);
+		System.out.println(getNumCoins());
+	}
+
+	public int getNumCoin() {
+		return getNumCoins();
+	}
+
+	public void setTotalCoin(int i) {
+		totalCoins = i;
+	}
+
+	public int getTotalCoin() {
+		return totalCoins;
+	}
 
 	/**
 	 * @return the numCoins
@@ -42,7 +64,8 @@ public class Player extends B2DSprite {
 	}
 
 	/**
-	 * @param numCoins the numCoins to set
+	 * @param numCoins
+	 *            the numCoins to set
 	 */
 	public void setNumCoins(int numCoins) {
 		Player.numCoins = numCoins;
